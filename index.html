@@ -148,7 +148,7 @@
         
         <div id="step1" class="step active">
             <img src="https://i.ibb.co/115ZPY9/disney-princess-love-GIF.gif" class="main-gif">
-            <h1>Aassal Will you be my Valentine?</h1>
+            <h1>Aassal can we hangout out?</h1>
             <div class="btn-container">
                 <button class="btn btn-yes" onclick="nextStep(1, 2)">YES ❤️</button>
                 <button class="btn btn-no" id="noBtn">NO</button>
@@ -166,29 +166,9 @@
 
         <div id="step3" class="step">
             <img src="https://i.ibb.co/xSYSWxQL/Walt-Disney-Animation-Studios-Film-GIF-by-Disney.gif" alt="Walt Disney Animation Studios Film GIF by Disney" border="0">
-            <h1>I'm getting hungry...</h1>
-            <p>What should we eat?</p>
-            <button class="btn btn-yes" onclick="nextStep(3, 4)">Let's see options! ➝</button>
-        </div>
-
-        <div id="step4" class="step">
-            <h1>i m hungry for you but we should eat smth </h1>
-            <div class="grid-container">
-                <div class="option-item" onclick="selectOption('food', 'Sushi', this)">
-                    <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400">Sushi
-                </div>
-                <div class="option-item" onclick="selectOption('food', 'Pizza', this)">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400">Pizza
-                </div>
-                <div class="option-item" onclick="selectOption('food', 'Tacos', this)">
-                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400">Tacos
-                </div>
-                <div class="option-item" onclick="enableCustom('food', this)">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" style="object-fit: contain;">Other
-                </div>
-            </div>
-            <input type="text" id="customFood" class="custom-input" placeholder="What are you craving?">
-            <button class="btn btn-yes" style="margin-top:10px" onclick="nextStep(4, 5)">Next ➝</button>
+            <h1>ooo brcha jaw...</h1>
+            <p>What should we do?</p>
+            <button class="btn btn-yes" onclick="nextStep(3, 5)">Let's see options! ➝</button>
         </div>
 
         <div id="step5" class="step">
@@ -202,7 +182,7 @@
             <h1>The Fun Part</h1>
             <div class="grid-container">
                 <div class="option-item" onclick="selectOption('activity', 'Movies', this)">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400">Movies
+                   <img src="https://i.ibb.co/LXgg1SHs/profitez-de-notre-terrasse.jpg" alt="profitez de notre terrasse" border="0">coffee shop
                 </div>
                 <div class="option-item" onclick="selectOption('activity', 'Arcade', this)">
                     <img src="https://i.ibb.co/MDQR78yp/20200710-134448-scaled-1.jpg" alt="20200710 134448 scaled 1" border="0">Arcade
@@ -228,7 +208,7 @@
 
         <div id="step8" class="step">
             <h1>See you then! 💖</h1>
-			<h2>love you and be in time</h2>
+            <h2>love you and be in time</h2>
             <img src="https://i.ibb.co/7Np6BNGD/aladdin-GIF.gif" class="main-gif">
             <button class="btn btn-yes" onclick="sendWhatsApp()">Send Response to Me</button>
         </div>
@@ -237,13 +217,9 @@
 
     <script>
         const phoneNumber = "21648233001";
-        let answers = { date: "", food: "", activity: "", excitement: "50" };
+        let answers = { date: "", activity: "", excitement: "50" };
 
         function nextStep(current, next) {
-            // Save custom values before leaving selection steps
-            if (current === 4 && document.getElementById('customFood').classList.contains('visible')) {
-                answers.food = document.getElementById('customFood').value || "Something Surprise";
-            }
             if (current === 6 && document.getElementById('customActivity').classList.contains('visible')) {
                 answers.activity = document.getElementById('customActivity').value || "Something Surprise";
             }
@@ -261,21 +237,19 @@
 
         function selectOption(type, value, el) {
             answers[type] = value;
-            document.getElementById(type === 'food' ? 'customFood' : 'customActivity').classList.remove('visible');
+            document.getElementById('customActivity').classList.remove('visible');
             let siblings = el.parentElement.children;
             for (let s of siblings) s.classList.remove('selected');
             el.classList.add('selected');
         }
 
         function enableCustom(type, el) {
-            let inputId = type === 'food' ? 'customFood' : 'customActivity';
-            document.getElementById(inputId).classList.add('visible');
+            document.getElementById('customActivity').classList.add('visible');
             let siblings = el.parentElement.children;
             for (let s of siblings) s.classList.remove('selected');
             el.classList.add('selected');
         }
 
-        // NO BUTTON RUNAWAY LOGIC
         const noBtn = document.getElementById('noBtn');
         const moveNo = () => {
             const x = Math.random() * (window.innerWidth - 100);
@@ -293,7 +267,7 @@
         });
 
         function sendWhatsApp() {
-            let msg = `Hey! I said YES! 💖\n\n🗓️ Date: ${answers.date}\n🍽️ Food: ${answers.food}\n🎡 Activity: ${answers.activity}\n🔥 Excitement: ${answers.excitement}%`;
+            let msg = `Hey! I said YES! 💖\n\n🗓️ Date: ${answers.date}\n🎡 Activity: ${answers.activity}\n🔥 Excitement: ${answers.excitement}%`;
             window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`;
         }
     </script>
